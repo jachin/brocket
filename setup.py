@@ -24,7 +24,7 @@ setup(
     packages=['brocket'],
     zip_safe=False,
     entry_points={
-        'console_scripts': ['brocketl=brocket.__main__:main'],
+        'console_scripts': ['brocket=brocket.__main__:main'],
     },
     install_requires=[
         'urlobject',
