@@ -41,6 +41,8 @@ parser.add_argument(
 def main():
     args = parser.parse_args()
 
+    #TODO If no tracking-id is available offer to set one.
+
     if args.show_tracking_id:
         print(brocket.tracking_id)
         sys.exit(0)

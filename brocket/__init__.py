@@ -9,6 +9,7 @@ import pyperclip
 
 prefs_file = os.path.expanduser("~/.brocket")
 
+#TODO Change preference file to something more universal and human readable.
 prefs = shelve.open(prefs_file)
 
 tracking_id = None
