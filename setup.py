@@ -13,8 +13,9 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Software Development :: Testing',
+        'Programming Language :: Python :: 3.5',
+        'Topic :: Utilities',
+        'Intended Audience :: End Users/Desktop',
     ],
     url='http://github.com/jachin/brocket',
     author='Jachin Rupe',
@@ -23,7 +24,7 @@ setup(
     packages=['brocket'],
     zip_safe=False,
     entry_points={
-        'console_scripts': ['brocketl=brocket.command_line:main'],
+        'console_scripts': ['brocketl=brocket.__main__:main'],
     },
     install_requires=[
         'urlobject',
