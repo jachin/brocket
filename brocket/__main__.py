@@ -9,13 +9,6 @@ import brocket
 
 prefs_file = os.path.expanduser("~/.brocket.cfg")
 
-# Setup the default config file if it's not there.
-if not os.path.isfile(prefs_file):
-    config = configparser.ConfigParser()
-    config['brocket'] = {'tracking_id': 'None'}
-    with open(prefs_file, 'w') as configfile:
-        config.write(configfile)
-
 parser = argparse.ArgumentParser(
     description='Make an Amazon link and Amazon Associates link.'
 )
@@ -67,7 +60,11 @@ def load_tracking_id():
 def main():
     args = parser.parse_args()
 
-    #TODO If no tracking-id is available offer to set one.
+    # Setup the default config file if it's not there.
+    if not os.path.isfile(prefs_file):
+        tracking_id = input('Enter Amazon Associates Tracking ID: ')
+        save_tracking_id(tracking_id)
+        sys.exit(0)
 
     if args.show_tracking_id:
         print(load_tracking_id())
