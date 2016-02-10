@@ -1,8 +1,9 @@
 import os
 import sys
-
 import argparse
 import configparser
+
+import pyperclip
 
 import brocket
 
@@ -74,6 +75,7 @@ def main():
 
     if args.set_tracking_id:
         save_tracking_id(args.set_tracking_id)
+        print("Tracking ID updated: {}".format(args.set_tracking_id))
         sys.exit(0)
 
     if args.tracking_id is None:
@@ -81,10 +83,30 @@ def main():
     else:
         tracking_id = args.tracking_id
 
+    via_clipboard = False
+
     if args.amazon_url is None:
-        brocket.process_clipboard_url(tracking_id)
+        url = pyperclip.paste()
+        via_clipboard = True
     else:
-        brocket.process_url(args.amazon_url, tracking_id)
+        url = args.amazon_url
+
+    if not brocket.is_amazon_url(url):
+        sys.exit(1)
+
+    amazon_assocate_url = brocket.process_url(url, tracking_id)
+
+    if via_clipboard:
+        msg = (
+            "Adding the tracking {} to the URL {} and putting it on the"
+            " clipboard."
+        )
+
+        print(msg.format(tracking_id, url))
+
+        pyperclip.copy(amazon_assocate_url)
+
+    print(amazon_assocate_url)
 
 if __name__ == "__main__":
     main()
