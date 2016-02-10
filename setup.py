@@ -7,7 +7,7 @@ def readme():
 
 setup(
     name='brocket',
-    version='1.0',
+    version='1.1',
     description='Build Amazon Associates Links in the clipboard super fast.',
     long_description=readme(),
     classifiers=[
@@ -16,6 +16,7 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Topic :: Utilities',
         'Intended Audience :: End Users/Desktop',
+        'Environment :: MacOS X',
     ],
     url='http://github.com/jachin/brocket',
     author='Jachin Rupe',
@@ -29,5 +30,6 @@ setup(
     install_requires=[
         'urlobject',
         'pyperclip',
+        'pync',
     ],
 )

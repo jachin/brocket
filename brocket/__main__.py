@@ -4,6 +4,7 @@ import argparse
 import configparser
 
 import pyperclip
+from pync import Notifier
 
 import brocket
 
@@ -89,6 +90,13 @@ def main():
         url = args.amazon_url
 
     if not brocket.is_amazon_url(url):
+
+        Notifier.notify(
+            'Not an Amazon URL on the clipboard.',
+            title='Brocket Error',
+            group="name.rupe.jachin.brocket"
+        )
+
         sys.exit(1)
 
     amazon_assocate_url = brocket.process_url(url, tracking_id)
@@ -102,6 +110,13 @@ def main():
         print(msg.format(tracking_id, url))
 
         pyperclip.copy(amazon_assocate_url)
+
+        Notifier.notify(
+            'Amazon URL Saved to Clipboard',
+            title='Brocket Success',
+            group="name.rupe.jachin.brocket",
+            open=url
+        )
 
     print(amazon_assocate_url)
 
