@@ -8,9 +8,9 @@ If you have a link in the clipboard, run this script, then the link on the clipb
 Setup
 -----
 
-After you `pip install brocket` just run `brocket`. It will prompt you for your tracking-id. Enter it.
+After you ``pip install brocket`` just run ``brocket``. It will prompt you for your tracking-id. Enter it.
 
-If you want you can make sure it's correct by running `brocket --show-tracking-id`.
+If you want you can make sure it's correct by running ``brocket --show-tracking-id``.
 
 How to Make Links
 -----------------
@@ -19,8 +19,8 @@ Once it's setup, the easiest thing to do is
 
  1. Browse to an Amazon URL you want an affiliate link for.
  2. Copy the URL
- 3. Run the `brocket` command. This will tag the URL with your tracking-id and put the new URL on the clipboard.
- 4. Past the URL where ever you want it to go.
+ 3. Run the ``brocket`` command. This will tag the URL with your tracking-id and put the new URL on the clipboard.
+ 4. Paste the URL where ever you want it to go.
 
 Brocket Deer
 ------------
