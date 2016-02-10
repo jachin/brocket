@@ -1,45 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import os
 import sys
-import shelve
 
 from urlobject import URLObject
 import pyperclip
-
-prefs_file = os.path.expanduser("~/.brocket")
-
-#TODO Change preference file to something more universal and human readable.
-prefs = shelve.open(prefs_file)
-
-tracking_id = None
-
-if os.path.isfile(prefs_file):
-    if 'tracking_id' in prefs:
-        tracking_id = prefs['tracking_id']
-
-prefs.close()
-
-
-def save_tracking_id(tracking_id):
-    prefs = shelve.open(prefs_file)
-    prefs['tracking_id'] = tracking_id
-    prefs.close()
-
-
-def load_tracking_id():
-    prefs = shelve.open(prefs_file)
-    tracking_id = prefs['tracking_id']
-    prefs.close()
-    return tracking_id
 
 
 def process_url(url, tracking_id):
     amazon_url = URLObject(url)
     aa_tag = tracking_id
 
-    # Lets do some sanity checking, make sure we have an amazon URL.
-
+    # Sanity checking, make sure we have an amazon URL.
     valid_hosts = ['amazon.com', 'www.amazon.com']
 
     if amazon_url.hostname not in valid_hosts:
