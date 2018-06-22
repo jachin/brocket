@@ -2,9 +2,9 @@ import os
 import sys
 import argparse
 import configparser
+import subprocess
 
 import pyperclip
-from pync import Notifier
 
 import brocket
 
@@ -58,6 +58,36 @@ def load_tracking_id():
     return config['brocket']['tracking_id']
 
 
+def notify(title, subtitle, message, openUrl=None):
+
+    cmd = ['terminal-notifier']
+
+    if title:
+        cmd.append('-title')
+        cmd.append(title)
+
+    if subtitle:
+        cmd.append('-subtitle')
+        cmd.append(subtitle)
+
+    if message:
+        cmd.append('-message')
+        cmd.append(message)
+
+    if openUrl:
+        cmd.append('-open')
+        cmd.append(str(openUrl))
+
+    try:
+        subprocess.call(cmd)
+    except OSError as e:
+        if e.errno == os.errno.ENOENT:
+            # Looks like terminal notifier is not available.
+            pass
+        else:
+            raise
+
+
 def main():
     args = parser.parse_args()
 
@@ -91,10 +121,10 @@ def main():
 
     if not brocket.is_amazon_url(url):
 
-        Notifier.notify(
-            'Not an Amazon URL on the clipboard.',
+        notify(
             title='Brocket Error',
-            group="name.rupe.jachin.brocket"
+            subtitle='Invalid URL',
+            message='Not an Amazon URL on the clipboard.',
         )
 
         sys.exit(1)
@@ -111,14 +141,15 @@ def main():
 
         pyperclip.copy(amazon_assocate_url)
 
-        Notifier.notify(
-            'Amazon URL Saved to Clipboard',
+        notify(
             title='Brocket Success',
-            group="name.rupe.jachin.brocket",
-            open=url
+            subtitle='URL Processed',
+            message='Amazon URL Saved to Clipboard.',
+            openUrl=amazon_assocate_url
         )
 
     print(amazon_assocate_url)
+
 
 if __name__ == "__main__":
     main()

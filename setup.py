@@ -5,9 +5,10 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
+
 setup(
     name='brocket',
-    version='1.1',
+    version='1.2',
     description='Build Amazon Associates Links in the clipboard super fast.',
     long_description=readme(),
     classifiers=[
@@ -30,6 +31,5 @@ setup(
     install_requires=[
         'urlobject',
         'pyperclip',
-        'pync',
     ],
 )
